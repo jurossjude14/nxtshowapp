@@ -19,15 +19,21 @@ import { Button } from "@/components/ui/button"
 import { getAllshowing } from "../../animaApi"
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from "@/components/ui/skeleton"
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect  } from 'react';
 import { Datacontext } from "@/app/providers/UseContextProvider";
 import { db } from "@/app/providers/IndexedDbQuery";
 const {animelist} = db;
+
+const today = new Date();
+const day = today.toLocaleDateString("en-US", { weekday: 'long' });
+const lowerCaseDay = day.toLowerCase();
 
 const SeasonAired = () => {
 
     const { objdata, setObjdata } = useContext(Datacontext);
     const [notif, setNotif] = useState(false);
+    const [daydate] = useState(lowerCaseDay);
+
 
     //Add Watchlist Function
     const addWatch = async (item) => {
@@ -39,16 +45,9 @@ const SeasonAired = () => {
         setTimeout(() => {
             setNotif(false);
         }, 2500);
-        //console.log(objdata);
     }
 
-
-    const today = new Date();
-
-    const day = today.toLocaleDateString("en-US", { weekday: 'long' });
-    const lowerCaseDay = day.toLowerCase();
-
-    const req = `schedules?filter=${lowerCaseDay}`;
+    const req = `schedules?filter=${daydate}`;
     const { isLoading, error, data: itemlist } = useQuery({
         queryKey: ['repoAiring'],
         queryFn: () => getAllshowing(req),
