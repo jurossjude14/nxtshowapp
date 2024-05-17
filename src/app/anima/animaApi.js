@@ -1,3 +1,4 @@
+
 const globalurl = process.env.NEXT_PUBLIC_ANIMA_URL;
 
 
