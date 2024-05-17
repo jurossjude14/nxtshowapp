@@ -1,4 +1,4 @@
-const globalurl = 'https://api.jikan.moe/v4/';
+const globalurl = process.env.NEXT_PUBLIC_ANIMA_URL;
 
 
 export const getAllshowing = async (req) => {
