@@ -12,8 +12,8 @@ export async function sendMail({
   const transport = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: SMTP_EMAIL,
-      pass: SMTP_PASSWORD,
+      user: "jurosswebtwopointzero@gmail.com",
+      pass: "qffx pamz euoy cyje",
     },
   });
   // try {
@@ -50,7 +50,7 @@ export async function sendMail({
 await new Promise((resolve, reject) => {
     // send mail
     transport.sendMail({
-      from: SMTP_EMAIL,
+      from: "jurosswebtwopointzero@gmail.com",
       to,
       subject,
       html: body,
