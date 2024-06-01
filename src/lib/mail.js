@@ -52,7 +52,7 @@ export async function sendMail({
 await new Promise((resolve, reject) => {
     // send mail
     transport.sendMail({
-      from: "jurosswebtwopointzero@gmail.com",
+      from: "jurosswebtwopointzero@nxtshowapp.vercel.app",
       to,
       subject,
       html: body,
