@@ -49,7 +49,7 @@ export async function sendMail({
   // }
 await new Promise((resolve, reject) => {
     // send mail
-    transporter.sendMail({
+    transport.sendMail({
       from: SMTP_EMAIL,
       to,
       subject,
