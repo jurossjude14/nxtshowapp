@@ -11,7 +11,7 @@ export async function POST(request) {
       const body = await request.json();
       const raw = JSON.stringify({...body});
       const myHeaders = new Headers();
-            myHeaders.append('x-apikey',process.env.RESTDB_API_KEY!);
+            myHeaders.append('x-apikey',process.env.RESTDB_API_KEY);
             myHeaders.append('Content-Type', 'application/json');
     
       const requestOptions = {
@@ -21,7 +21,7 @@ export async function POST(request) {
         redirect: 'follow',
       };
 
-      const response = await fetch(process.env.RESTDB_API_URL!, requestOptions);
+      const response = await fetch(process.env.RESTDB_API_URL, requestOptions);
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
