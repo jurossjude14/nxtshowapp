@@ -3,29 +3,17 @@
 import { NextResponse } from "next/server";
 import { senddata } from "../../components/mailaction";
 
-// export async function POST(request) {
-//     try {
-//         const body = await request.json();
-//         //console.log(body);
-//         senddata(body);
-//         return NextResponse.json({ message:"Sucessfully Added Data", status:200});
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
-
-const API_KEY = '68821227a4ba380f5f084c86869e66b7e35fd'; // Replace with your actual API key
-const API_URL = 'https://jurosleads-d86e.restdb.io/rest/leadsdb';
+// const API_KEY = '68821227a4ba380f5f084c86869e66b7e35fd'; // Replace with your actual API key
+// const API_URL = 'https://jurosleads-d86e.restdb.io/rest/leadsdb';
 
 export async function POST(request) {
   try {
       const body = await request.json();
-  
       const raw = JSON.stringify({...body});
       const myHeaders = new Headers();
-      myHeaders.append('x-apikey', API_KEY);
-      myHeaders.append('Content-Type', 'application/json');
-
+            myHeaders.append('x-apikey',process.env.RESTDB_API_KEY);
+            myHeaders.append('Content-Type', 'application/json');
+    
       const requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -33,7 +21,7 @@ export async function POST(request) {
         redirect: 'follow',
       };
 
-      const response = await fetch(API_URL, requestOptions);
+      const response = await fetch(process.env.RESTDB_API_URL, requestOptions);
       if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
       }
