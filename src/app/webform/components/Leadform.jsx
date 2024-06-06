@@ -43,12 +43,6 @@ const { leadlist } = db;
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 
-const restdbapikey = process.env.NEXT_PUBLIC_RESTDB_API_KEY;
-console.log('Rest DB KEY:', restdbapikey);
-
-const restdbapiurl = process.env.NEXT_PUBLIC_RESTDB_API_URL;
-console.log('Rest DB KEY:', restdbapiurl);
-
 
 const formSchema = z.object({
   fullname: z.string().min(2, {
