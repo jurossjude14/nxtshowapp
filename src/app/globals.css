@@ -448,3 +448,83 @@ h4.text-sm.font-semibold.cs-label {
 .cs-btn-expand {
   margin-top: 20px !IMPORTANT;
 }
+
+.stepper-parent {
+  display: flex;
+  justify-content: flex-end;
+}
+
+span.stepcaption {
+  display: flex;
+  align-items: center;
+  margin-top:20px;
+  border-top:1px solid #1f2937;
+  padding-top:15px;
+}
+
+span.titletab {
+  width: 50%;
+}
+
+span.titletab h3 {
+  color: #7e99bf;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+li.active-class a {background: #1f2937;}
+.dont-click {
+  pointer-events: none;
+}
+
+span.title-cont {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+span.title-cont {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  margin-bottom:10px;
+}
+
+
+.child-fields {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.child-fields input {
+  width: 100% !important;
+}
+
+.child-fields div {
+  width: 80%;
+}
+
+.child-fields .space-y-2 {margin-top:0px!important;}
+
+span.title-cont a {
+  display: flex;
+  font-size: 14px;
+  background: #212121;
+  border: 1px solid #1f2937;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+span.title-cont a:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+nav a:hover {
+  cursor: pointer;
+}
