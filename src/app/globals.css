@@ -528,3 +528,8 @@ span.title-cont a:hover {
 nav a:hover {
   cursor: pointer;
 }
+
+.custom-send-toast {
+  background: #054b42;
+  border-left: 5px solid #1aac99;
+}
