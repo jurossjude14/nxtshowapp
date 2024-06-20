@@ -58,39 +58,34 @@ import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
 
-
 const formSchema = z.object({
-  fullname: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  fullname: z.string().min(5, {
+    message: "Fullname must be at least 5 characters.",
   }),
-  email: z.string().min(2, {
-    message: "Input Email Address",
-  }),
-  phone: z.string().min(2, {
+  email: z.string().email({ message: "Invalid Email Address" }),
+  phone: z.string().min(5, {
     message: "Input Correct Phone",
   }),
-  website: z.string().min(2, {
-    message: "Input Correct Website",
-  }),
+  website: z.string().url({ message: "Invalid Website Url" }),
   webservice: z.string({
-    required_error: "Please Select of Tyoe Service.",
+    required_error: "Please Select of Type of Service.",
   }),
   desc: z.string().min(10, {
-    message: "Desc must be at least 10 characters.",
+    message: "Description must be at least 10 characters.",
   })
     .max(160, {
-      message: "Desc must not be longer than 30 characters.",
+      message: "Description must not be longer than 30 characters.",
     }),
   refer: z.enum(["socials", "webmail", "searching"], {
-    required_error: "You need to select a notification type.",
+    required_error: "You need to select where do you find my profile.",
   }),
   other: z.string({
-    required_error: "Please fill out additional resources",
+    required_error: "Please fill in additional resources",
   }),
   items: z.array(
     z.object({
       itemName: z.string({
-        required_error: "Please fill out additional resources",
+        required_error: "Please fill in urls you want to provide",
       })
     })
   ).min(0),
@@ -151,8 +146,9 @@ const Leadform = () => {
     },
     onSuccess: async () => {
       toast({
-        title: "Data added",
-        description: "Kindly check if your data is on indexedDB",
+        title: "Data Added 🚀",
+        className: "custom-send-toast",
+        description: "Kindly check if your data is stored in indexedDB and RestDB.io",
       })
       form.reset();
       setTimeout(() => {
@@ -376,7 +372,7 @@ const Leadform = () => {
                         ))}
                         
                       </div>
-                      <Button type="submit" className="cs-btn-expand" disabled={mutation.isPending}> {mutation.isPending ? 'Loading...' : 'Submit'}</Button>
+                      <Button type="submit" className="cs-btn-expand" disabled={mutation.isPending}> {mutation.isPending ? 'Sending Data...' : 'Submit'}</Button>
                       {mutation.isError ? (<div>An error occurred: {mutation.error.message}</div>) : null}
                     </>
                   )}
