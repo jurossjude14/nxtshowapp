@@ -58,6 +58,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 
 
+
 const formSchema = z.object({
   fullname: z.string().min(5, {
     message: "Fullname must be at least 5 characters.",
@@ -99,6 +100,7 @@ const day = today.toDateString();
 const Leadform = () => {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
+  const [resultSingle, setResultSingle] = useState({});
 
   const { toast } = useToast()
 
@@ -146,14 +148,15 @@ const Leadform = () => {
     },
     onSuccess: async () => {
       toast({
-        title: "Data Added 🚀",
+        title: "Data added 🚀",
         className: "custom-send-toast",
-        description: "Kindly check if your data is stored in indexedDB and RestDB.io",
+        description: "Kindly check if your data is on indexedDB and RestDBIO",
       })
       form.reset();
       setTimeout(() => {
         mutation.reset();
       }, 1300);
+      setCurrentStep(2);
     }
   })
 
@@ -163,6 +166,7 @@ const Leadform = () => {
     const singleObj = { ...values, datelog: day };
     mutation.mutate({ ...singleObj });
     await db.leadlist.add({ ...singleObj });
+    setResultSingle({ ...singleObj });
   }
   return (
     <>
@@ -191,10 +195,11 @@ const Leadform = () => {
               <h1 className="text-3xl font-bold">Web Lead Form</h1>
               <p className="text-balance text-muted-foreground">
                 kindly fillup the form below, we can evaluate your request
+                {mutation.isPending ? (<div><h3>Adding Data...</h3></div>) : null}
               </p>
             </div>
             <div className="grid gap-4 cs-form">
-            {mutation.isPending ? (<div><h3>Adding Data...</h3></div>) : null}
+           
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   {currentStep === 0 && (
@@ -377,34 +382,48 @@ const Leadform = () => {
                     </>
                   )}
 
+                  {currentStep === 2 && ( 
+                    <>
+                      <h2 className="h2-data">Your Data is Added here's your information</h2>
+                      <span className="data-list-one">
+                        {JSON.stringify(resultSingle,null,'\t')}
+                      </span>
+                    </>
+                  )}
+
 
                 </form>
                 <span className="stepcaption">
                   <span className="titletab">
                     <h3>
-                      {currentStep === 0 ? ('STEP 1 Important Fields') : ('STEP 2 Additional Fields')}
+                      {currentStep === 0 && ('STEP 1 Important Fields')}
+                      {currentStep === 1 && ('STEP 2 Additional Fields')}
                     </h3>
                   </span>
-                  <Pagination className="stepper-parent">
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious onClick={prev} isActive className={`${currentStep === 0 && 'dont-click'}`} />
-                      </PaginationItem>
-                      <PaginationItem className={`${currentStep === 0 && 'active-class'}`}>
-                        <PaginationLink onClick={() => setCurrentStep(0)} isActive={currentStep === 0}>
-                          1
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem className={`${currentStep === 1 && 'active-class'}`}>
-                        <PaginationLink onClick={() => setCurrentStep(1)} isActive={currentStep === 1}>
-                          2
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationNext onClick={next} isActive className={`${currentStep === 1 && 'dont-click'}`} />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
+
+                  {currentStep <= 1  && ( 
+                    <Pagination className="stepper-parent">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious onClick={prev} isActive className={`${currentStep === 0 && 'dont-click'}`} />
+                        </PaginationItem>
+                        <PaginationItem className={`${currentStep === 0 && 'active-class'}`}>
+                          <PaginationLink onClick={() => setCurrentStep(0)} isActive={currentStep === 0}>
+                            1
+                          </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem className={`${currentStep === 1 && 'active-class'}`}>
+                          <PaginationLink onClick={() => setCurrentStep(1)} isActive={currentStep === 1}>
+                            2
+                          </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationNext onClick={next} isActive className={`${currentStep >= 1 && 'dont-click'}`} />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  )}
+
                 </span>
               </Form>
             </div>
