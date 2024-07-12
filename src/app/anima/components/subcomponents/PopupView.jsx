@@ -16,7 +16,7 @@ const PopupView = ({open,setOpen,selecteditem}) => {
     return (
         <>
             <AlertDialog open={open} onOpenChange={setOpen} className="custom-pop-width">
-                <AlertDialogContent className="custom-pop-width-full">
+                <AlertDialogContent className="custom-pop-width-full-anima">
                     <AlertDialogHeader>
                         <AlertDialogTitle>Preview Anime Details</AlertDialogTitle>
                         <AlertDialogDescription>
