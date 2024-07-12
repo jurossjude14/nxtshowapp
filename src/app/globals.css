@@ -924,3 +924,7 @@ span.form-styling-fields {
 .btn-update {
   float: right;
 }
+
+.custom-pop-width-full-anima {
+    max-width: 530px;
+}
